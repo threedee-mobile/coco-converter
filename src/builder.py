@@ -1,22 +1,23 @@
 from models import Column
 from models import XCo2
 from models import Place
-from uuid import uuid4
 import json
+import uuid
 
-def id():
-	return uuid4()
+def id() -> str:
+	return str(uuid.uuid1())
 
-def generatePlace(city, region, country, lon, lat, primaryColumn, neighbouringColumns):
+def generatePlace(city: str, region: str, country: str, lon: float, lat: float, primaryColumn: Column, *neighbouringColumns: Column) -> Place:
 	place = Place(id(), city, region, country, lon, lat, primaryColumn, neighbouringColumns)
 	# print(place.toJson())
 	return place
 
-def generateJson(placesArray):
-	placesJson = json.dumps(placesArray, default=lambda o: o.__dict__, sort_keys=True, indent=2)
+def generateJson(*placesArray: Place):
+	placesJson = json.dumps(placesArray, default=lambda o: o.__dict__, sort_keys=False, indent=2)
 	file = open("../assets/output.json", "w")
 	file.write(placesJson)
 	file.close()
+	print("DONE")
 
 def main():
 	# RUN FROM COMMAND LINE: python -c 'from builder import *; main()'
