@@ -1,120 +1,81 @@
 [
   [
     {
-      "id": "e55fe4b6-05c3-11eb-9f2c-8c85901946f0",
+      "id": "4a821528-05c7-11eb-a1ae-8c85901946f0",
       "city": "toronto",
       "region": "ontario",
       "country": "ca",
       "lon": 43.65,
       "lat": -79.38,
-      "primaryColumn": {
-        "id": "e55fe11e-05c3-11eb-9f2c-8c85901946f0",
-        "lon": 43.65,
-        "lat": -79.38,
-        "xco2": {
-          "monthly_xco2": [
-            100,
-            200,
-            300,
-            400,
-            500,
-            600,
-            700,
-            800,
-            900,
-            1000,
-            1100,
-            1200
-          ],
-          "monthly_uncertainty": [
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1
-          ]
+      "monthly": [
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
+        },
+        {
+          "value": 350,
+          "uncertainty": 5
         }
-      },
-      "neighouringColumns": [
-        [
-          {
-            "id": "e55fe11e-05c3-11eb-9f2c-8c85901946f0",
-            "lon": 43.65,
-            "lat": -79.38,
-            "xco2": {
-              "monthly_xco2": [
-                100,
-                200,
-                300,
-                400,
-                500,
-                600,
-                700,
-                800,
-                900,
-                1000,
-                1100,
-                1200
-              ],
-              "monthly_uncertainty": [
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1
-              ]
-            }
-          },
-          {
-            "id": "e55fe11e-05c3-11eb-9f2c-8c85901946f0",
-            "lon": 43.65,
-            "lat": -79.38,
-            "xco2": {
-              "monthly_xco2": [
-                100,
-                200,
-                300,
-                400,
-                500,
-                600,
-                700,
-                800,
-                900,
-                1000,
-                1100,
-                1200
-              ],
-              "monthly_uncertainty": [
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1,
-                0.1
-              ]
-            }
+      ],
+      "neighbouringColumns": [
+        {
+          "id": "4a821118-05c7-11eb-a1ae-8c85901946f0",
+          "lon": 43.65,
+          "lat": -79.38,
+          "xco2": {
+            "value": 350,
+            "uncertainty": 5
           }
-        ]
+        },
+        {
+          "id": "4a821118-05c7-11eb-a1ae-8c85901946f0",
+          "lon": 43.65,
+          "lat": -79.38,
+          "xco2": {
+            "value": 350,
+            "uncertainty": 5
+          }
+        }
       ]
     }
   ]

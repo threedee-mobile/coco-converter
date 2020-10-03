@@ -1,5 +1,5 @@
 from models import Column
-from models import XCo2
+from models import XCO2
 from models import Place
 import json
 import uuid
@@ -7,8 +7,8 @@ import uuid
 def id() -> str:
 	return str(uuid.uuid1())
 
-def generatePlace(city: str, region: str, country: str, lon: float, lat: float, primaryColumn: Column, *neighbouringColumns: Column) -> Place:
-	place = Place(id(), city, region, country, lon, lat, primaryColumn, neighbouringColumns)
+def generatePlace(city: str, region: str, country: str, lon: float, lat: float, monthly, neighbouringColumns) -> Place:
+	place = Place(id(), city, region, country, lon, lat, monthly, neighbouringColumns)
 	# print(place.toJson())
 	return place
 
@@ -21,11 +21,11 @@ def generateJson(*placesArray: Place):
 
 def main():
 	# RUN FROM COMMAND LINE: python -c 'from builder import *; main()'
-	monthly_xco2 = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
-	monthly_uncertainty = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-	xco2 = XCo2(monthly_xco2, monthly_uncertainty)
+	xco2 = XCO2(350, 5)
+	monthly = [xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2]
 	column = Column(id(), 43.65, -79.38, xco2)
 	neighbouringColumns = [column, column]
-	place = generatePlace("toronto", "ontario", "ca", 43.65, -79.38, column, neighbouringColumns)
+
+	place = generatePlace("toronto", "ontario", "ca", 43.65, -79.38, monthly, neighbouringColumns)
 
 	generateJson([place])
