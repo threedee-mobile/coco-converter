@@ -26,6 +26,6 @@ def main():
 	xco2 = XCo2(monthly_xco2, monthly_uncertainty)
 	column = Column(id(), 43.65, -79.38, xco2)
 	neighbouringColumns = [column, column]
-	place = generatePlace("Toronto", "Ontario", "CA", 43.65, -79.38, column, neighbouringColumns)
+	place = generatePlace("toronto", "ontario", "ca", 43.65, -79.38, column, neighbouringColumns)
 
 	generateJson([place])
