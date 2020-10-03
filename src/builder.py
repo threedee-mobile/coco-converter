@@ -1,6 +1,7 @@
 from models import Column
 from models import XCO2
 from models import Place
+from models import Data
 import json
 import uuid
 
@@ -12,10 +13,10 @@ def generatePlace(city: str, region: str, country: str, lon: float, lat: float, 
 	# print(place.toJson())
 	return place
 
-def generateJson(*placesArray: Place):
-	placesJson = json.dumps(placesArray, default=lambda o: o.__dict__, sort_keys=False, indent=2)
+def generateJson(data: Data):
+	resultJson = json.dumps(data, default=lambda o: o.__dict__, sort_keys=False, indent=2)
 	file = open("../assets/output.json", "w")
-	file.write(placesJson)
+	file.write(resultJson)
 	file.close()
 	print("DONE")
 
@@ -28,4 +29,4 @@ def main():
 
 	place = generatePlace("toronto", "ontario", "ca", 43.65, -79.38, monthly, neighbouringColumns)
 
-	generateJson([place])
+	generateJson(Data([place]))

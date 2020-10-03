@@ -48,3 +48,7 @@ class Place(Model):
 		self.lat = lat
 		self.monthly = monthly
 		self.neighbouringColumns = neighbouringColumns
+
+class Data(Model):
+	def __init__(self, places):
+		self.places = places
