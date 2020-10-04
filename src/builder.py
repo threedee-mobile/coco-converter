@@ -9,11 +9,18 @@ import numpy as np
 import netCDF4 as nc
 import os
 
+def co2MonthAvg(ds, long, lat, month):
+    checkLong, checkLat = ds['lon'][:], ds['lat'][:]
+    longInd = np.argsort(np.abs(checkLong - long))[0]
+    latInd = np.argsort(np.abs(checkLat - lat))[0]
+    print(longInd, latInd)
+    return ds['land'][month-1, latInd, longInd]
+
 def id() -> str:
 	return str(uuid.uuid4())
 
 def generateCell(lon: float, lat: float, ff_co2: float, ib_co2: float) -> Cell:
-	cell = Cell(id(), lon, lat, ff_co2, ib_co2)
+	cell = Cell(id(), lat, lon, ff_co2, ib_co2)
 	# print(place.toJson())
 	return cell
 
@@ -33,10 +40,11 @@ def main():
         latMin, latMax = 42, 83
         lonMin, lonMax = -141, -53
         '''
-
+        #'''
         # Boundary latitudes/longitudes for scanning the data. [North America]
         latMin, latMax = 10, 83
         lonMin, lonMax = -180, -53
+        #'''
         
         for year in [2016, 2017, 2018]:
                 print(year)
