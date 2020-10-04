@@ -1,80 +1,43 @@
 {
-  "places": [
+  "year": 2019,
+  "monthlyData": [
     {
-      "id": "33028048-05c9-11eb-b630-8c85901946f0",
-      "city": "toronto",
-      "region": "ontario",
-      "country": "ca",
-      "lon": 43.65,
-      "lat": -79.38,
-      "monthly": [
+      "month": "january",
+      "monthIndex": 0,
+      "cells": [
         {
-          "value": 350,
-          "uncertainty": 5
+          "id": "653afc62-5f15-43fb-8563-7e75d1d93047",
+          "lat": 43.65,
+          "lon": -79.38,
+          "ff_co2": 2.89,
+          "ib_co2": 1.98
         },
         {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
-        },
-        {
-          "value": 350,
-          "uncertainty": 5
+          "id": "16f5b8d7-8224-4ccf-9bc0-6f96f2493467",
+          "lat": 41.65,
+          "lon": -77.38,
+          "ff_co2": 2.99,
+          "ib_co2": 1.25
         }
-      ],
-      "neighbouringColumns": [
+      ]
+    },
+    {
+      "month": "february",
+      "monthIndex": 1,
+      "cells": [
         {
-          "id": "33027c9c-05c9-11eb-b630-8c85901946f0",
-          "lon": 43.65,
-          "lat": -79.38,
-          "xco2": {
-            "value": 350,
-            "uncertainty": 5
-          }
+          "id": "653afc62-5f15-43fb-8563-7e75d1d93047",
+          "lat": 43.65,
+          "lon": -79.38,
+          "ff_co2": 2.89,
+          "ib_co2": 1.98
         },
         {
-          "id": "33027c9c-05c9-11eb-b630-8c85901946f0",
-          "lon": 43.65,
-          "lat": -79.38,
-          "xco2": {
-            "value": 350,
-            "uncertainty": 5
-          }
+          "id": "16f5b8d7-8224-4ccf-9bc0-6f96f2493467",
+          "lat": 41.65,
+          "lon": -77.38,
+          "ff_co2": 2.99,
+          "ib_co2": 1.25
         }
       ]
     }

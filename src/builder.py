@@ -1,20 +1,20 @@
-from models import Column
-from models import XCO2
-from models import Place
-from models import Data
+from models import Cell
+from models import Month
+from models import MonthData
+from models import YearData
 import json
 import uuid
 
 def id() -> str:
-	return str(uuid.uuid1())
+	return str(uuid.uuid4())
 
-def generatePlace(city: str, region: str, country: str, lon: float, lat: float, monthly, neighbouringColumns) -> Place:
-	place = Place(id(), city, region, country, lon, lat, monthly, neighbouringColumns)
+def generateCell(lon: float, lat: float, ff_co2: float, ib_co2: float) -> Cell:
+	cell = Cell(id(), lon, lat, ff_co2, ib_co2)
 	# print(place.toJson())
-	return place
+	return cell
 
-def generateJson(data: Data):
-	resultJson = json.dumps(data, default=lambda o: o.__dict__, sort_keys=False, indent=2)
+def generateJson(yearData: YearData):
+	resultJson = json.dumps(yearData, default=lambda o: o.__dict__, sort_keys=False, indent=2)
 	file = open("../assets/output.json", "w")
 	file.write(resultJson)
 	file.close()
@@ -22,11 +22,10 @@ def generateJson(data: Data):
 
 def main():
 	# RUN FROM COMMAND LINE: python -c 'from builder import *; main()'
-	xco2 = XCO2(350, 5)
-	monthly = [xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2, xco2]
-	column = Column(id(), 43.65, -79.38, xco2)
-	neighbouringColumns = [column, column]
-
-	place = generatePlace("toronto", "ontario", "ca", 43.65, -79.38, monthly, neighbouringColumns)
-
-	generateJson(Data([place]))
+	c1 = generateCell(43.65, -79.38, 2.89, 1.98)
+	c2 = generateCell(41.65, -77.38, 2.99, 1.25)
+	monthData1 = MonthData(Month.JAN, [c1, c2])
+	monthData2 = MonthData(Month.FEB, [c1, c2])
+	yearData = YearData(2019, [monthData1, monthData2])
+	
+	generateJson(yearData)

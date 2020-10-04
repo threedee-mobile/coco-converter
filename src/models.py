@@ -1,54 +1,71 @@
+from enum import Enum
 import json
 
 class Model:
 	def toJson(self) -> str:
 		 return json.dumps(self, default=lambda o: o.__dict__, sort_keys=False, indent=2)
 
-'''
-@param value         An XCO2 (in units of ppm) reading from the OCO-2 data
-@param uncertainty   The uncertainty (in units of ppm) associated with the reading
-'''
-class XCO2(Model):
-	def __init__(self, value: float, uncertainty: float):
-		self.value = value
-		self.uncertainty = uncertainty
 		
 '''
-Represents the column defined by the OCO-2 data 
-@param id     Random UUID
-@param lon    The longitude at the center of the sounding field-of-view
-@param lat    The latitude at the center of the sounding field-of-view
-@param xco2   XCO2 data of ths column
+Represents a "cell" defined in the ODIAC data set
+@param id       Random UUID
+@param lat      The longitude at the center of the cell
+@param lon      The latitude at the center of the cell
+@param ff_co2   CO2 emissions value from fossil fuel combustion, cement production and gas flaring
+@param ib_co2   CO2 emissions value from international aviation and marine bunker, plus antarctic fishery
 '''
-class Column(Model):
-	def __init__(self, columnId: str, lon: float, lat: float, xco2: XCO2):
-		self.id = columnId
-		self.lon = lon
+class Cell(Model):
+	def __init__(self, cellId: str, lat: float, lon: float, ff_co2: float, ib_co2):
+		self.id = cellId
 		self.lat = lat
-		self.xco2 = xco2
+		self.lon = lon
+		self.ff_co2 = ff_co2
+		self.ib_co2 = ib_co2
+
+class Month(str, Enum):
+        JAN = "january"
+        FEB = "february"
+        MAR = "march"
+        APR = "april"
+        MAY = "may"
+        JUN = "june"
+        JUL = "july"
+        AUG = "august"
+        SEP = "september"
+        OCT = "october"
+        NOV = "november"
+        DEC = "december"
+
+monthArray = [
+        Month.JAN,
+        Month.FEB,
+        Month.MAR,
+        Month.APR,
+        Month.MAY,
+        Month.JUN,
+        Month.JUL,
+        Month.AUG,
+        Month.SEP,
+        Month.OCT,
+        Month.NOV,
+        Month.DEC
+]
 
 '''
-Represents a city or point of interest in our data set 
-@param id                   Random UUID
-@param city                 Lowercase name of the city
-@param region               Lowercase name of the province / state
-@param country              Lowercase 2-character country code 
-@param lon 				
-@param lat 					
-@param monthly              An array of 12 containing the average XCO2 for the month corresponding to the index 
-@param neighbouringColumns  An array of Columns in the 50km radius around this location
+@param month    The Month corresponding to the Cells
+@param cells    Array of Cells from the data occurring in the given Month
 '''
-class Place(Model):
-	def __init__(self, placeId: str, city: str, region: str, country: str, lon: float, lat: float, monthly, neighbouringColumns):
-		self.id = placeId
-		self.city = city
-		self.region = region
-		self.country = country
-		self.lon = lon
-		self.lat = lat
-		self.monthly = monthly
-		self.neighbouringColumns = neighbouringColumns
+class MonthData(Model):
+        def __init__(self, month: Month, cells):
+                self.month = month
+                self.monthIndex = monthArray.index(month)
+                self.cells = cells
 
-class Data(Model):
-	def __init__(self, places):
-		self.places = places
+'''
+@param year         The year corresponding to the MonthData
+@param monthlyData  Array of MonthData from the data occurring in the given year
+'''
+class YearData(Model):
+	def __init__(self, year: int, monthlyData):
+		self.year = year
+		self.monthlyData = monthlyData
