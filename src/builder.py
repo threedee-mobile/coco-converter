@@ -22,11 +22,15 @@ def generateJson(data: Data):
 	print("DONE")
 
 def main():
-	# RUN FROM COMMAND LINE: python -c 'from builder import *; main()'
-	c1 = generateCell(43.65, -79.38, 2.89, 1.98)
-	c2 = generateCell(41.65, -77.38, 2.99, 1.25)
+	# Sample data generation
+	c1 = generateCell(43.1, -79.3, 2.8, 1.9)
+	c2 = generateCell(41.6, -77.5, 2.9, 1.25)
 	monthData1 = MonthData(Month.JAN, [c1, c2])
-	monthData2 = MonthData(Month.FEB, [c1, c2])
+
+	c3 = generateCell(42.1, -78.3, 2.7, 1.8)
+	c4 = generateCell(41.65, -77.22, 3.9, 1.9)
+	monthData2 = MonthData(Month.FEB, [c3, c4])
+	
 	yearData1 = YearData(2018, [monthData1, monthData2])
 	yearData2 = YearData(2019, [monthData1, monthData2])
 	
