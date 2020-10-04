@@ -28,11 +28,17 @@ def main():
         monthList = [Month.JAN, Month.FEB, Month.MAR, Month.APR, Month.MAY, Month.JUN, Month.JUL, Month.AUG, Month.SEP, Month.OCT, Month.NOV, Month.DEC]
         yearArray = []
 
-        # Boundary latitudes/longitudes for scanning the data.
+        '''
+        # Boundary latitudes/longitudes for scanning the data. [Canada]
         latMin, latMax = 42, 83
         lonMin, lonMax = -141, -53
+        '''
+
+        # Boundary latitudes/longitudes for scanning the data. [North America]
+        latMin, latMax = 10, 83
+        lonMin, lonMax = -180, -53
         
-        for year in [2015, 2016, 2017, 2018]:
+        for year in [2016, 2017, 2018]:
                 print(year)
                 ds = nc.Dataset("../../DATA/odiac2019_1x1d_" + str(year) + ".nc")
                 lonList, latList, ffList, ibList = ds['lon'][:], ds['lat'][:], ds['land'][:], ds['intl_bunker'][:]
