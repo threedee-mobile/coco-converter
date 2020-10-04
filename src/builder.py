@@ -27,8 +27,12 @@ def generateJson(data: Data):
 def main():
         monthList = [Month.JAN, Month.FEB, Month.MAR, Month.APR, Month.MAY, Month.JUN, Month.JUL, Month.AUG, Month.SEP, Month.OCT, Month.NOV, Month.DEC]
         yearArray = []
+
+        # Boundary latitudes/longitudes for scanning the data.
+        latMin, latMax = 42, 83
+        lonMin, lonMax = -141, -53
         
-        for year in [2018]:
+        for year in [2015, 2016, 2017, 2018]:
                 print(year)
                 ds = nc.Dataset("../../DATA/odiac2019_1x1d_" + str(year) + ".nc")
                 lonList, latList, ffList, ibList = ds['lon'][:], ds['lat'][:], ds['land'][:], ds['intl_bunker'][:]
@@ -41,17 +45,31 @@ def main():
                         for i in range(len(latList)):
                                 for j in range(len(lonList)):
                                         lon, lat = lonList[j], latList[i]
+
+                                        # Ignore any data points that fall outside the boundaries we set.
+                                        if (lat < latMin or lat > latMax or lon < lonMin or lon > lonMax):
+                                                continue
+                                        
                                         ff_co2, ib_co2 = ffList[month, i, j], ibList[month, i, j]
+
+                                        # Ignore any data points that have no emission.
+                                        if (ff_co2 == 0 and ib_co2 == 0):
+                                                continue
+
+                                        # Create a data cell from this data, at this point.
                                         c = generateCell(float(lon), float(lat), float(ff_co2), float(ib_co2))
                                         cellArray.append(c)
 
+                        # Aggregate all the cells for a given month to create a data profile for the month.
                         m = MonthData(monthList[month], cellArray)
                         monthArray.append(m)
 
+                # Aggregate all the data from all months to create a profile for the year.
                 y = YearData(year, monthArray)
                 yearArray.append(y)
                 print("\n")
 
+        # Put together all years to generate the Json file.
         generateJson(Data(yearArray))
         
         '''
