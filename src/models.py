@@ -69,3 +69,10 @@ class YearData(Model):
 	def __init__(self, year: int, monthlyData):
 		self.year = year
 		self.monthlyData = monthlyData
+		
+'''
+@param yearData  Array of YearData
+'''
+class Data(Model):
+	def __init__(self, yearData):
+		self.data = yearData

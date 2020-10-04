@@ -2,6 +2,7 @@ from models import Cell
 from models import Month
 from models import MonthData
 from models import YearData
+from models import Data
 import json
 import uuid
 
@@ -13,8 +14,8 @@ def generateCell(lon: float, lat: float, ff_co2: float, ib_co2: float) -> Cell:
 	# print(place.toJson())
 	return cell
 
-def generateJson(yearData: YearData):
-	resultJson = json.dumps(yearData, default=lambda o: o.__dict__, sort_keys=False, indent=2)
+def generateJson(data: Data):
+	resultJson = json.dumps(data, default=lambda o: o.__dict__, sort_keys=False, indent=2)
 	file = open("../assets/output.json", "w")
 	file.write(resultJson)
 	file.close()
@@ -26,6 +27,7 @@ def main():
 	c2 = generateCell(41.65, -77.38, 2.99, 1.25)
 	monthData1 = MonthData(Month.JAN, [c1, c2])
 	monthData2 = MonthData(Month.FEB, [c1, c2])
-	yearData = YearData(2019, [monthData1, monthData2])
+	yearData1 = YearData(2018, [monthData1, monthData2])
+	yearData2 = YearData(2019, [monthData1, monthData2])
 	
-	generateJson(yearData)
+	generateJson(Data([yearData1, yearData2]))
